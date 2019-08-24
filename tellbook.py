@@ -60,13 +60,19 @@ def remove_contact():
 def update_contact():
     os.system("clear")
     number = input("Number: ")
-    if number not in contacts:
+    if not search_contact(number):
         input("The number is not exists in book, press enter to back menu...")
     else:
         firstname = input("Firstname: ")
         lastname = input("Lastname: ")
         address = input("Address: ")
-        contacts[number] = Contact(number, firstname, lastname, address)
+        i = 0
+        for contact in contacts:
+            if contact.get("number") == number:
+                contacts[i] = {"number": number, "firstname": firstname,
+                               "lastname": lastname, "address": address}
+                break
+            i += 1
         input("Contact updated. press enter to back menu...")
 
 
