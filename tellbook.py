@@ -2,15 +2,7 @@
 import os
 from pathlib import Path
 
-contacts = {}
-
-
-class Contact:
-    def __init__(self, number, firstname, lastname, address):
-        self.number = number
-        self.firstname = firstname
-        self.lastname = lastname
-        self.address = address
+contacts = []
 
 
 def display_menu():
