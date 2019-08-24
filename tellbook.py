@@ -44,8 +44,14 @@ def add_contact():
 def remove_contact():
     os.system("clear")
     number = input("Number: ")
-    if number in contacts:
-        del contacts[number]
+    if search_contact(number):
+        i = 0
+        for contact in contacts:
+            if contact.get("number") == number:
+                del contacts[i]
+                break
+            i += 1
+
         input("Contact removed. press enter to back menu...")
     else:
         input("The number is not exists in book, press enter to back menu...")
