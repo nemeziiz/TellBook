@@ -15,6 +15,7 @@ class Contact:
 
 def display_menu():
     print("Welcome to Contact Book")
+    print(f"Total Contacts: {len(contacts)}")
     print("----------------------")
     print("1. Add Contact")
     print("2. Remove Contact")
