@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 import os
+import json
+import sqlite3
 from pathlib import Path
 
 contacts = []
@@ -17,16 +19,25 @@ def display_menu():
     print("6. Exit")
 
 
+def search_contact(number):
+    for contact in contacts:
+        if contact.get("number") == number:
+            return True
+    return False
+
+
 def add_contact():
     os.system("clear")
     number = input("Number: ")
-    if number in contacts:
+    if search_contact(number):
         input("The number already exists in book, press enter to back menu...")
     else:
         firstname = input("Firstname: ")
         lastname = input("Lastname: ")
         address = input("Address: ")
-        contacts[number] = Contact(number, firstname, lastname, address)
+        contact = {"number": number, "firstname": firstname,
+                   "lastname": lastname, "address": address}
+        contacts.append(contact)
         input("Contact created. press enter to back menu...")
 
 
