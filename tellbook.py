@@ -4,7 +4,15 @@ import json
 import sqlite3
 from pathlib import Path
 
-contacts = []
+path = Path("contacts.json")
+if path.exists():
+    contacts = json.loads(path.read_text())
+else:
+    contacts = []
+
+
+def save_contact():
+    path.write_text(json.dumps(contacts))
 
 
 def display_menu():
@@ -38,6 +46,7 @@ def add_contact():
         contact = {"number": number, "firstname": firstname,
                    "lastname": lastname, "address": address}
         contacts.append(contact)
+        save_contact()
         input("Contact created. press enter to back menu...")
 
 
@@ -49,6 +58,7 @@ def remove_contact():
         for contact in contacts:
             if contact.get("number") == number:
                 del contacts[i]
+                save_contact()
                 break
             i += 1
 
@@ -71,6 +81,7 @@ def update_contact():
             if contact.get("number") == number:
                 contacts[i] = {"number": number, "firstname": firstname,
                                "lastname": lastname, "address": address}
+                save_contact()
                 break
             i += 1
         input("Contact updated. press enter to back menu...")
