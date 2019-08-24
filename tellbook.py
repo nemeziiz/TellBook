@@ -95,9 +95,9 @@ def contact_list():
         print("There are no contacts on your book.")
         input("Press enter to back to menu...")
     else:
-        for number in contacts:
+        for contact in contacts:
             print(
-                f"{contacts[number].number}: {contacts[number].firstname} {contacts[number].lastname} from {contacts[number].address}")
+                f"""{contact["number"]}: {contact["firstname"]} {contact["lastname"]} from {contact["address"]}""")
         input("Press enter to back to menu...")
 
 
