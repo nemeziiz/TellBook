@@ -79,11 +79,14 @@ def update_contact():
 def find_contact():
     os.system("clear")
     number = input("Number: ")
-    if number not in contacts:
+    if not search_contact(number):
         input("The number is not exists in book, press enter to back menu...")
     else:
-        print(
-            f"{contacts[number].number}: {contacts[number].firstname} {contacts[number].lastname} from {contacts[number].address}")
+        for contact in contacts:
+            if contact.get("number") == number:
+                print(
+                    f"""{contact["number"]}: {contact["firstname"]} {contact["lastname"]} from {contact["address"]}""")
+                break
         input("Press enter to back to menu...")
 
 
