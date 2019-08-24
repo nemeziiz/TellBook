@@ -72,6 +72,17 @@ def find_contact():
         input("Press enter to back to menu...")
 
 
+def contact_list():
+    if len(contacts) == 0:
+        print("There are no contacts on your book.")
+        input("Press enter to back to menu...")
+    else:
+        for number in contacts:
+            print(
+                f"{contacts[number].number}: {contacts[number].firstname} {contacts[number].lastname} from {contacts[number].address}")
+        input("Press enter to back to menu...")
+
+
 while True:
     os.system("clear")
     display_menu()
@@ -86,6 +97,6 @@ while True:
     elif option == "4":
         find_contact()
     elif option == "5":
-        pass
+        contact_list()
     elif option == "6":
         break
