@@ -48,6 +48,19 @@ def remove_contact():
         input("The number is not exists in book, press enter to back menu...")
 
 
+def update_contact():
+    os.system("clear")
+    number = input("Number: ")
+    if number not in contacts:
+        input("The number is not exists in book, press enter to back menu...")
+    else:
+        firstname = input("Firstname: ")
+        lastname = input("Lastname: ")
+        address = input("Address: ")
+        contacts[number] = Contact(number, firstname, lastname, address)
+        input("Contact updated. press enter to back menu...")
+
+
 while True:
     os.system("clear")
     display_menu()
@@ -58,7 +71,7 @@ while True:
     elif option == "2":
         remove_contact()
     elif option == "3":
-        pass
+        update_contact()
     elif option == "4":
         pass
     elif option == "5":
