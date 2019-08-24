@@ -38,6 +38,16 @@ def add_contact():
         input("Contact created. press enter to back menu...")
 
 
+def remove_contact():
+    os.system("clear")
+    number = input("Number: ")
+    if number in contacts:
+        del contacts[number]
+        input("Contact removed. press enter to back menu...")
+    else:
+        input("The number is not exists in book, press enter to back menu...")
+
+
 while True:
     os.system("clear")
     display_menu()
@@ -46,7 +56,7 @@ while True:
     if option == "1":
         add_contact()
     elif option == "2":
-        pass
+        remove_contact()
     elif option == "3":
         pass
     elif option == "4":
