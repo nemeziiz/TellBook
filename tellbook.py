@@ -2,6 +2,8 @@
 import os
 from pathlib import Path
 
+contacts = {}
+
 
 class Contact:
     def __init__(self, number, firstname, lastname, address):
@@ -15,10 +17,24 @@ def display_menu():
     print("Welcome to Contact Book")
     print("----------------------")
     print("1. Add Contact")
+    print("2. Remove Contact")
     print("3. Update Contact")
     print("4. Find Contact")
     print("5. Contact List")
     print("6. Exit")
+
+
+def add_contact():
+    os.system("clear")
+    number = input("Number: ")
+    if number in contacts:
+        input("The number already exists in book, press enter to back menu...")
+    else:
+        firstname = input("Firstname: ")
+        lastname = input("Lastname: ")
+        address = input("Address: ")
+        contacts[number] = Contact(number, firstname, lastname, address)
+        input("Contact created. press enter to back menu...")
 
 
 while True:
@@ -27,7 +43,7 @@ while True:
     print()
     option = input("Select an option: ")
     if option == "1":
-        pass
+        add_contact()
     elif option == "2":
         pass
     elif option == "3":
