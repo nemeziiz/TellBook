@@ -61,6 +61,17 @@ def update_contact():
         input("Contact updated. press enter to back menu...")
 
 
+def find_contact():
+    os.system("clear")
+    number = input("Number: ")
+    if number not in contacts:
+        input("The number is not exists in book, press enter to back menu...")
+    else:
+        print(
+            f"{contacts[number].number}: {contacts[number].firstname} {contacts[number].lastname} from {contacts[number].address}")
+        input("Press enter to back to menu...")
+
+
 while True:
     os.system("clear")
     display_menu()
@@ -73,7 +84,7 @@ while True:
     elif option == "3":
         update_contact()
     elif option == "4":
-        pass
+        find_contact()
     elif option == "5":
         pass
     elif option == "6":
