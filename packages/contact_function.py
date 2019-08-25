@@ -4,7 +4,7 @@ from .database_function import save_contact
 
 def display_menu(contacts):
     print("Welcome to Contact Book")
-    # print(f"Total Contacts: {len(contacts)}")
+    print(f"Total Contacts: {len(contacts)}")
     print("----------------------")
     print("1. Add Contact")
     print("2. Remove Contact")
