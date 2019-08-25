@@ -4,11 +4,38 @@ import json
 import sqlite3
 from pathlib import Path
 
-path = Path("contacts.json")
-if path.exists():
-    contacts = json.loads(path.read_text())
-else:
-    contacts = []
+
+def create_database():
+    with sqlite3.connect("db.sqlite3") as conn:
+        command = """CREATE TABLE "contacts" ("number"	TEXT, "firstname"	TEXT, "lastname"	TEXT, "address"	INTEGER,
+        PRIMARY KEY("number") );"""
+        cursor = conn.cursor()
+        cursor.execute(command)
+        conn.commit()
+
+
+def save_database(number, firstname, lastname, address):
+    with sqlite3.connect("db.sqlite3") as conn:
+        command = "INSERT INTO contacts VALUES(?, ?, ?, ?)"
+        cursor = conn.cursor()
+        cursor.execute(command, (number, firstname, lastname, address))
+        conn.commit()
+
+
+def update_database(number, firstname, lastname, address):
+    with sqlite3.connect("db.sqlite3") as conn:
+        command = """UPDATE contacts SET firstname = ?, lastname = ?, address = ? WHERE number = ? """
+        cursor = conn.cursor()
+        cursor.execute(command, (firstname, lastname, address, number))
+        conn.commit()
+
+
+def remove_database(number):
+    with sqlite3.connect("db.sqlite3") as conn:
+        command = """DELETE FROM contacts WHERE number = ? """
+        cursor = conn.cursor()
+        cursor.execute(command, (number, ))
+        conn.commit()
 
 
 def save_contact():
@@ -47,6 +74,7 @@ def add_contact():
                    "lastname": lastname, "address": address}
         contacts.append(contact)
         save_contact()
+        save_database(number, firstname, lastname, address)
         input("Contact created. press enter to back menu...")
 
 
@@ -59,6 +87,7 @@ def remove_contact():
             if contact.get("number") == number:
                 del contacts[i]
                 save_contact()
+                remove_database(number)
                 break
             i += 1
 
@@ -82,6 +111,7 @@ def update_contact():
                 contacts[i] = {"number": number, "firstname": firstname,
                                "lastname": lastname, "address": address}
                 save_contact()
+                update_database(number, firstname, lastname, address)
                 break
             i += 1
         input("Contact updated. press enter to back menu...")
@@ -110,6 +140,26 @@ def contact_list():
             print(
                 f"""{contact["number"]}: {contact["firstname"]} {contact["lastname"]} from {contact["address"]}""")
         input("Press enter to back to menu...")
+
+
+if not Path("db.sqlite3").exists():
+    create_database()
+
+with sqlite3.connect("db.sqlite3") as conn:
+    command = "SELECT * FROM contacts"
+    contacts = conn.execute(command)
+    path = Path("contacts.json")
+    data = []
+    for contact in contacts:
+        data.append({"number": contact[0], "firstname": contact[1],
+                     "lastname": contact[2], "address": contact[3]})
+    path.write_text(json.dumps(data))
+
+path = Path("contacts.json")
+if path.exists():
+    contacts = json.loads(path.read_text())
+else:
+    contacts = []
 
 
 while True:
