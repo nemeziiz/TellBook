@@ -21,8 +21,8 @@ def search_contact(number, contacts):
     return False
 
 
-def add_contact(contacts, path):
-    os.system("clear")
+def add_contact(contacts, path, platform):
+    os.system(platform)
     number = input("Number: ")
     if search_contact(number, contacts):
         input("The number already exists in book, press enter to back menu...")
@@ -38,8 +38,8 @@ def add_contact(contacts, path):
         input("Contact created. press enter to back menu...")
 
 
-def remove_contact(contacts, path):
-    os.system("clear")
+def remove_contact(contacts, path, platform):
+    os.system(platform)
     number = input("Number: ")
     if search_contact(number, contacts):
         i = 0
@@ -56,8 +56,8 @@ def remove_contact(contacts, path):
         input("The number is not exists in book, press enter to back menu...")
 
 
-def update_contact(contacts, path):
-    os.system("clear")
+def update_contact(contacts, path, platform):
+    os.system(platform)
     number = input("Number: ")
     if not search_contact(number, contacts):
         input("The number is not exists in book, press enter to back menu...")
@@ -77,8 +77,8 @@ def update_contact(contacts, path):
         input("Contact updated. press enter to back menu...")
 
 
-def find_contact(contacts):
-    os.system("clear")
+def find_contact(contacts, platform):
+    os.system(platform)
     number = input("Number: ")
     if not search_contact(number, contacts):
         input("The number is not exists in book, press enter to back menu...")
@@ -91,7 +91,8 @@ def find_contact(contacts):
         input("Press enter to back to menu...")
 
 
-def contact_list(contacts):
+def contact_list(contacts, platform):
+    os.system(platform)
     if len(contacts) == 0:
         print("There are no contacts on your book.")
         input("Press enter to back to menu...")
