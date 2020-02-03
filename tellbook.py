@@ -3,7 +3,8 @@ import os
 import json
 import platform
 from pathlib import Path
-from packages.contact_function import display_menu, add_contact, remove_contact, update_contact, find_contact, contact_list
+from packages.contact_function import display_menu, add_contact, remove_contact, update_contact, find_contact,\
+    contact_list
 
 platform = "cls" if platform.system() == "Windows" else "clear"
 path = Path("contacts.json")
